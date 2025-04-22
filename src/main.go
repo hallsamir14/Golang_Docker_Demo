@@ -1,13 +1,15 @@
 package main
 
 import (
-	"fmt"
-	"golangDockerDemo/request_parser"
+	"golangDockerDemo/struct_parser"
 )
 
 func main() {
-	fmt.Println("Lets Parse A Json RQ")
-	var message string = `{"name":"Samir"}`
-	json_data := request_parser.Json_payload{}
+	json_data := struct_parser.Json_payload{}
+	message, err := json_data.Get_file("complex.json")
 	json_data.Parse_json(message)
+
+	if err != nil {
+		panic(err)
+	}
 }

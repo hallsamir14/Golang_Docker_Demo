@@ -1,0 +1,35 @@
+{
+    "company": "TechCorp",
+    "employees": [
+      {
+        "id": 1,
+        "name": "Charlie",
+        "roles": ["Developer", "Team Lead"],
+        "contact": {
+          "email": "charlie@techcorp.com",
+          "phone": "123-456-7890"
+        }
+      },
+      {
+        "id": 2,
+        "name": "Dana",
+        "roles": ["Designer"],
+        "contact": {
+          "email": "dana@techcorp.com",
+          "phone": "987-654-3210"
+        }
+      }
+    ],
+    "projects": [
+      {
+        "name": "Project Alpha",
+        "status": "In Progress",
+        "budget": 100000
+      },
+      {
+        "name": "Project Beta",
+        "status": "Completed",
+        "budget": 75000
+      }
+    ]
+  }
