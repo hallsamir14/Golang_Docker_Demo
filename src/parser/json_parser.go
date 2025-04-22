@@ -1,4 +1,4 @@
-package struct_parser
+package parser
 
 import (
 	"encoding/json"
