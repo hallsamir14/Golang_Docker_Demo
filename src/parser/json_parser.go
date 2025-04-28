@@ -27,7 +27,7 @@ func (j *Json_payload) Parse_json(message string) map[string]interface{} {
 
 		log.Print("Number of Fields in Payload:", j.num_of_fields)
 		log.Print("Byte Size of Payload:", j.message_size)
-		log.Print("Parsed Data:", j.json_data)
+
 		return j.json_data
 	}
 }
