@@ -7,12 +7,12 @@ DOCKER_IMAGE_NAME = golang_docker_demo
 .PHONY: all
 all: build
 
-# Build the Go binary
+#Compile source into binary
 .PHONY: build
 build:
 	cd src; go build -o ../$(BINARY_NAME) $(SOURCE_FILE)
 
-# Run the Go binary
+# Run binary
 .PHONY: run
 run: build
 	cd src; ../$(BINARY_NAME)
@@ -22,17 +22,15 @@ run: build
 clean:
 	rm -f $(BINARY_NAME)
 
-# Run the Go binary
+# Build image for container
 .PHONY: build-image
 build-image: build-image
 	docker build -t $(DOCKER_IMAGE_NAME) .
 
-# Run the Go binary
+# Run go binary in container environment
 .PHONY: run-image
-build-image:
+run-image:
 	 docker run $(DOCKER_IMAGE_NAME):latest
-
-
 
 # Display help
 .PHONY: help
@@ -41,4 +39,7 @@ help:
 	@echo "  build   - Build the Go binary"
 	@echo "  run     - Build and run the Go binary"
 	@echo "  clean   - Remove the built binary"
+	@echo "  build-image    - Build Docker image for container"
+	@echo "  run-image      - Run container with binary"
 	@echo "  help    - Display this help message"
+	
