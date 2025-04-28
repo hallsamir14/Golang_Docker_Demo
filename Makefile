@@ -1,6 +1,7 @@
 # Variables
 BINARY_NAME = main.bin
 SOURCE_FILE = main.go
+DOCKER_IMAGE_NAME = golang_docker_demo
 
 # Default target
 .PHONY: all
@@ -20,6 +21,18 @@ run: build
 .PHONY: clean
 clean:
 	rm -f $(BINARY_NAME)
+
+# Run the Go binary
+.PHONY: build-image
+build-image: build-image
+	docker build -t $(DOCKER_IMAGE_NAME) .
+
+# Run the Go binary
+.PHONY: run-image
+build-image:
+	 docker run $(DOCKER_IMAGE_NAME):latest
+
+
 
 # Display help
 .PHONY: help

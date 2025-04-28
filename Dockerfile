@@ -1,27 +1,32 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.19
+# Stage 1: Build
+FROM golang:1.24 AS builder
 
-# Set destination for COPY
+# Set working directory
 WORKDIR /src
 
-# Download Go modules
+# Copy go.mod and download dependencies
 COPY ./src/go.mod ./
 RUN go mod download
 
-# Copy the source code. Note the slash at the end, as explained in
-# https://docs.docker.com/reference/dockerfile/#copy
+# Copy the source code
 COPY ./src ./
 
-# Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /<binary_name>
+# Build the Go binary
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main.bin main.go
 
-# Optional:
-# To bind to a TCP port, runtime parameters must be supplied to the docker command.
-# But we can document in the Dockerfile what ports
-# the application is going to listen on by default.
-# https://docs.docker.com/reference/dockerfile/#expose
-EXPOSE <PORT>
+# Stage 2: Run
+FROM alpine:latest
 
-# Run
-CMD ["./<binary_name>"]
+# Set working directory
+WORKDIR /root/
+
+# Copy the binary from the builder stage
+COPY --from=builder /src/main.bin .
+
+# Expose the port (if your app listens on a specific port, e.g., 8080)
+# EXPOSE 8080
+
+# Run the binary
+CMD ["./main.bin"]
