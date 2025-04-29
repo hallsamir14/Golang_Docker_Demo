@@ -14,6 +14,5 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(message)
-
+	fmt.Println(json_data)
 }
