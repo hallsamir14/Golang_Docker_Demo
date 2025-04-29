@@ -20,7 +20,7 @@ func (j *Json_payload) Parse_json(message string) map[string]interface{} {
 		log.Fatal("Error Occured:", err)
 		return nil
 	} else {
-		log.Print("Json Parsed Successfuly")
+		log.Print("JSON Parsed Successfuly")
 
 		j.num_of_fields = len(j.json_data)
 		j.message_size = len(message)
@@ -32,13 +32,13 @@ func (j *Json_payload) Parse_json(message string) map[string]interface{} {
 	}
 }
 
-func (j *Json_payload) Get_file(filename string) (string, error) {
+func (j *Json_payload) Read_from_file(filename string) (string, error) {
 	file_data, err := os.ReadFile(fmt.Sprintf("../samples/json/%v", filename))
 
 	if err != nil {
 		return "", err
 	}
-	fmt.Println(string(file_data))
+	log.Print("JSON file read successfully")
 	return string(file_data), nil
 
 }
