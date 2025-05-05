@@ -7,6 +7,11 @@ import (
 	"os"
 )
 
+/*
+struct will only have 3 data members
+num_of_fields and message_size basic metadeta
+json_data will store deserialized data from json
+*/
 type Json_payload struct {
 	num_of_fields int
 	message_size  int
@@ -33,7 +38,8 @@ func (j *Json_payload) Parse_json(message string) map[string]interface{} {
 }
 
 func (j *Json_payload) Read_from_file(filename string) (string, error) {
-	file_data, err := os.ReadFile(fmt.Sprintf("../samples/json/%v", filename))
+	//TODO make samples path dynamic so it can read files releative to execution location of binary
+	file_data, err := os.ReadFile(fmt.Sprintf("./samples/%v", filename))
 
 	if err != nil {
 		return "", err
