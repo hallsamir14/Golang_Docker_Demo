@@ -15,7 +15,7 @@ build:
 # Run binary
 .PHONY: run
 run: build
-	cd src; ../$(BINARY_NAME)
+	./$(BINARY_NAME) $(ARGS)
 
 # Clean up the binary
 .PHONY: clean
@@ -31,6 +31,14 @@ build-image: build-image
 .PHONY: run-image
 run-image:
 	 docker run $(DOCKER_IMAGE_NAME):latest
+
+# Stop and remove all containers
+.PHONY: clean-containers
+clean-containers:
+	@echo "Stopping and removing all containers..."
+	docker stop $$(docker ps -q) || true
+	docker rm $$(docker ps -a -q) || true
+
 
 # Display help
 .PHONY: help
