@@ -4,14 +4,13 @@ import (
 	"testing"
 )
 
-func test_init(t *testing.T) {
-	var filename string = "simple.json"
+func Test_init(t *testing.T) {
+	var message string = `{
+        "name": "John Doe",
+        "age": 30,
+        "email": "johndoe@example.com"
+    }`
 
 	json_data := Json_payload{}
-	message, err := json_data.Read_from_file(filename)
 	json_data.Parse_json(message)
-
-	if err != nil {
-		t.Error()
-	}
 }
