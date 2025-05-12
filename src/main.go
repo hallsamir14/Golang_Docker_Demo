@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	var filename string = "complex.json"
+	var filename string = "simple.json"
 	var args []string = os.Args
 
 	if len(args) > 1 && args[1] != "" {
