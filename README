@@ -1,6 +1,3 @@
-hallsamir14: draft a readme for this repo
-
-GitHub Copilot: ```markdown
 # Golang Docker Demo
 
 This repository demonstrates a simple Go application that parses JSON files and runs in a Docker container. The application reads JSON files, parses their content, and logs metadata such as the number of fields and the size of the payload.
