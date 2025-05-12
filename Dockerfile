@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ./src/go.mod ./
 RUN go mod download
 
-# Copy the source code
+# Copy the source code to working directory
 COPY ./src ./
 
 # Build the Go binary
@@ -21,6 +21,9 @@ FROM alpine:latest
 
 # Set working directory
 WORKDIR /root/
+
+#Copy json samples to root
+COPY ./samples /samples
 
 # Copy the binary from the builder stage
 COPY --from=builder /src/main.bin .
