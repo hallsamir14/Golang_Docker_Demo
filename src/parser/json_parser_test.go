@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func Test_init(t *testing.T) {
+func Test_parse_json(t *testing.T) {
 	var message string = `{
         "name": "John Doe",
         "age": 30,
