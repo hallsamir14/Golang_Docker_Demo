@@ -3,6 +3,7 @@ BINARY_NAME = main.bin
 SOURCE_FILE = main.go
 DOCKER_IMAGE_NAME = golang_docker_demo
 
+
 # Default target
 .PHONY: all
 all: build
@@ -12,7 +13,8 @@ all: build
 build:
 	cd src; go build -o ../$(BINARY_NAME) $(SOURCE_FILE)
 
-# Run binary
+# Run binary, will pass any arguments to the binary
+# Usage: make run ARGS="arg1 ... argN"
 .PHONY: run
 run: build
 	./$(BINARY_NAME) $(ARGS)
