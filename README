@@ -1,0 +1,140 @@
+hallsamir14: draft a readme for this repo
+
+GitHub Copilot: ```markdown
+# Golang Docker Demo
+
+This repository demonstrates a simple Go application that parses JSON files and runs in a Docker container. The application reads JSON files, parses their content, and logs metadata such as the number of fields and the size of the payload.
+
+## Project Structure
+
+```
+golang_docker_demo/
+├── Dockerfile          # Docker configuration for building and running the app
+├── Makefile            # Makefile for building, running, and managing the app
+├── README              # Project documentation
+├── samples/            # Sample JSON files for testing
+│   ├── simple.json
+│   ├── moderate.json
+│   └── complex.json
+├── src/                # Source code for the application
+│   ├── go.mod          # Go module definition
+│   ├── main.go         # Entry point of the application
+│   └── parser/         # JSON parsing logic
+│       └── json_parser.go
+└── .gitignore          # Git ignore rules
+```
+
+## Features
+
+- Parses JSON files and logs metadata:
+  - Number of fields in the JSON payload
+  - Byte size of the JSON payload
+- Supports reading JSON files from a `samples` directory
+- Dockerized for easy deployment and execution
+
+## Prerequisites
+
+- [Go](https://golang.org/dl/) 1.24 or later
+- [Docker](https://www.docker.com/)
+- [Make](https://www.gnu.org/software/make/)
+
+## Usage
+
+### Running Locally
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd golang_docker_demo
+   ```
+
+2. Build the Go binary:
+   ```bash
+   make build
+   ```
+
+3. Run the application with a sample JSON file:
+   ```bash
+   make run ARGS="simple.json"
+   ```
+
+   Replace simple.json with moderate.json or complex.json to test other files.
+
+4. Clean up the binary:
+   ```bash
+   make clean
+   ```
+
+### Running with Docker
+
+1. Build the Docker image:
+   ```bash
+   make build-image
+   ```
+
+2. Run the Docker container:
+   ```bash
+   make run-image
+   ```
+
+   The container will process the default simple.json file. To use a different file, modify the `CMD` in the Dockerfile or pass arguments to the container.
+
+3. Stop and remove all containers:
+   ```bash
+   make clean-containers
+   ```
+
+## Sample JSON Files
+
+The samples directory contains three JSON files for testing:
+
+- simple.json: A basic JSON object with a few fields.
+- moderate.json: A JSON object with nested structures and arrays.
+- complex.json: A complex JSON object with multiple nested arrays and objects.
+
+## Code Overview
+
+### Main Application
+
+The entry point is `main.go`, which:
+
+- Reads a JSON file from the samples directory.
+- Parses the JSON content using the `Json_payload` struct from `json_parser.go`.
+- Logs metadata about the JSON payload.
+
+### JSON Parser
+
+The `json_parser.go` file contains:
+
+- `Json_payload` struct: Stores metadata and parsed JSON data.
+- `Parse_json`: Parses a JSON string and extracts metadata.
+- `Read_from_file`: Reads a JSON file from the samples directory.
+
+## Docker Configuration
+
+The Dockerfile defines a multi-stage build:
+
+1. **Build Stage**: Compiles the Go application into a binary.
+2. **Run Stage**: Copies the binary and sample JSON files into a lightweight Alpine image for execution.
+
+## Makefile Targets
+
+- `build`: Compiles the Go binary.
+- `run`: Builds and runs the binary with optional arguments.
+- `clean`: Removes the compiled binary.
+- `build-image`: Builds the Docker image.
+- `run-image`: Runs the Docker container.
+- `clean-containers`: Stops and removes all Docker containers.
+- `help`: Displays available Makefile targets.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## Contact
+
+For questions or feedback, please contact the repository owner.
